@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+Загрузить файлы
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <h2 class="text-center">Загрузить файлы</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="file" class="form-label">Выберите файл</label>
+                <input type="file" class="form-control" id="file" name="file" required>
+            </div>
+            <div class="mb-3">
+                <label for="folder_id" class="form-label">Выберите папку (необязательно)</label>
+                <select class="form-select" id="folder_id" name="folder_id">
+                    <option value="">Без папки</option>
+                    {% for folder in folders %}
+                    <option value="{{ folder.id }}">{{ folder.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Загрузить</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
