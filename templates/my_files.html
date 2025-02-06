@@ -9,6 +9,7 @@
     <div class="col-md-8">
         <h2 class="text-center">Мои файлы</h2>
 
+        <!-- Отображение папок -->
         {% if folders %}
             <h4>Папки:</h4>
             <ul class="list-group mb-4">
@@ -24,6 +25,7 @@
             </ul>
         {% endif %}
 
+        <!-- Отображение файлов -->
         {% if files %}
             <h4>Файлы:</h4>
             <table class="table table-bordered">
@@ -38,7 +40,7 @@
                     {% for file in files %}
                         <tr>
                             <th scope="row">{{ loop.index }}</th>
-                            <td>{{ file.name }}</td>
+                            <td>{{ file.name }}</td>  <!-- Оригинальное имя файла -->
                             <td>
                                 <a href="{{ url_for('download_file', file_id=file.id) }}" class="btn btn-sm btn-success">Скачать</a>
                                 <a href="{{ url_for('delete_file', file_id=file.id) }}" class="btn btn-sm btn-danger">Удалить</a>

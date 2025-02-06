@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+Панель администратора
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+        <h2 class="text-center">Панель администратора</h2>
+        <p>Добро пожаловать, администратор!</p>
+        <div class="d-grid gap-2">
+            <a href="{{ url_for('admin_users') }}" class="btn btn-primary">Список пользователей</a>
+            <a href="{{ url_for('admin_files') }}" class="btn btn-primary">Список файлов</a>
+            <a href="{{ url_for('change_admin_password') }}" class="btn btn-warning">Изменить пароль</a>
+            <a href="{{ url_for('admin_logout') }}" class="btn btn-danger">Выйти</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
