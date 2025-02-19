@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
-from waitress import serve
 import os
 import uuid
 
@@ -11,7 +10,7 @@ import uuid
 app = Flask(__name__)
 app.config['SECRET_KEY'] = uuid.uuid4().hex
 app.config['MAX_CONTENT_LENGTH'] = 1 * 1024 * 1024 * 1024
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///storage.db'  # База данных SQLite
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/yourusername/yourproject/database.db'  # База данных SQLite
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['SESSION_COOKIE_SECURE'] = True
@@ -396,7 +395,4 @@ with app.app_context():
         db.session.commit()
 
 if __name__ == '__main__':
-    # Debug/Development
-    app.run(debug=True, host="0.0.0.0", port="5000")
-    # Production
-    # serve(app, host="0.0.0.0", port=5000)
+    app.run(debug=False, host="0.0.0.0", port=5000)
