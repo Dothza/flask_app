@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request, flash, send_from_directory, session
 from flask_sqlalchemy import SQLAlchemy
+from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
@@ -10,12 +11,15 @@ import uuid
 app = Flask(__name__)
 app.config['SECRET_KEY'] = uuid.uuid4().hex
 app.config['MAX_CONTENT_LENGTH'] = 1 * 1024 * 1024 * 1024
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/fjutsuu/flask_app/database.db'  # База данных SQLite
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'  # База данных SQLite
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['SESSION_COOKIE_SECURE'] = True
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+
+# Защита CSRF токеном
+csrf = CSRFProtect(app)
 
 # Инициализация SQLAlchemy и Flask-Login
 db = SQLAlchemy(app)
